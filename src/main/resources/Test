@@ -1,0 +1,10 @@
+{"code":200,"msg":"success",
+"data":
+{"basic":
+{"cid":"CN101200101","location":"武汉","parent_city":"武汉","admin_area":"湖北省","cnty":"中国","lat":"30.584354","lon":"114.298569","tz":"+8.00"},
+"update":{"loc":"2021-11-28 15:37","utc":"2021-11-28 07:37"},
+"status":"ok","now":{"cloud":"0","cond_code":"100","cond_txt":"晴","fl":"18","hum":"44","pcpn":"0.0","pres":"1022","tmp":"18","vis":"10","wind_deg":"180","wind_dir":"南风","wind_sc":"0","wind_spd":"0"}
+},
+"time":1638085786,
+"log_id":323488996817719296
+}
