@@ -7,11 +7,10 @@
 fork或者clone此项目到你的本地，并使用IDE工具打开并构建它。
 
 ### 修改配置文件
-打开文件 [simbot.yml](src/main/resources/simbot.yml) 并修改其中的 `simbot.core.bots` 项为你测试用的QQ账号，例如：
+打开文件 [yourBot.bot](src/main/resources/simbot-bots/yourBot.bot) 并修改其中的code项为你测试用的QQ账号，password项为你的测试QQ账号密码，例如：
 ```yaml
-simbot: 
-  core:
-    bots: 123456789:password
+code=123456
+password=123456
 ```
 
 ### 保证安静
@@ -30,4 +29,11 @@ simbot:
 
 ### 协助
 如果你有一个好的示例点子，你可以通过[github pr](https://github.com/simple-robot/simbot-mirai-demo/pulls) 来协助此demo项目的更新。
+
+### 友情链接
+
+- [simpler-robot: simple-robot](https://github.com/Maousuki/simpler-robot)（感谢提供的Robot框架）
+- [A-SOUL提醒小助手 IDEA版](https://github.com/cnsky1103/A-SOUL-Reminder)（感谢提供绕过SSL验证方法）
+- [A-SOUL Fans Art - 一个魂的二创 ](https://asoul.cloud/)（感谢提供的随机图片api）
+- [NeteaseCloudMusicApi: 网易云音乐 Node.js API](https://github.com/Maousuki/NeteaseCloudMusicApi)（感谢提供的网易云api）
 
