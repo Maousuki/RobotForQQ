@@ -23,7 +23,8 @@ public class HotTop {
     @Filter(value = "热榜",matchType = MatchType.STARTS_WITH)
     public void hotTop(GroupMsg msg, Sender sender){
         String text = msg.getText();
-        String app = text.substring(3,text.length());
+        text = text.replace(" ","");
+        String app = text.substring(2,text.length());
         System.out.println(app);
 
         if (app.equals("知乎")){

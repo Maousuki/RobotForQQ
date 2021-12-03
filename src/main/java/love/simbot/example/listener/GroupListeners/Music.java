@@ -24,7 +24,8 @@ public class Music {
     @Filter(value = "点歌",matchType = MatchType.STARTS_WITH)
     public void music(GroupMsg msg, Sender sender){
         String text = msg.getText();
-        String song = text.substring(3,text.length());
+        text = text.replace(" ", "");
+        String song = text.substring(2,text.length());
         System.out.println(song);
 
         StringBuffer result = new StringBuffer();

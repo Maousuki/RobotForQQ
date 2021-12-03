@@ -22,7 +22,8 @@ public class Weather {
     @Filter(value = "天气预报",matchType = MatchType.STARTS_WITH)
     public void Weather(GroupMsg msg, Sender sender){
         String text = msg.getText();
-        String city = text.substring(5,text.length());
+        text = text.replace(" ","");
+        String city = text.substring(4,text.length());
         System.out.println(city);
 
         StringBuffer result = new StringBuffer();
