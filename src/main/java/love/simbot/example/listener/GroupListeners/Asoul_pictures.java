@@ -27,7 +27,7 @@ import javax.net.ssl.HostnameVerifier;
 public class Asoul_pictures {
 
     @OnGroup
-    @Filter(value = "asoul", matchType = MatchType.EQUALS)
+    @Filter(value = "%asoul", matchType = MatchType.EQUALS)
     public void pictures(GroupMsg msg, Sender sender){
 
         StringBuffer result = new StringBuffer();

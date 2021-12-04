@@ -19,7 +19,7 @@ import java.net.URLEncoder;
 @Beans
 public class Weather {
     @OnGroup
-    @Filter(value = "天气预报",matchType = MatchType.STARTS_WITH)
+    @Filter(value = "%天气预报",matchType = MatchType.STARTS_WITH)
     public void Weather(GroupMsg msg, Sender sender){
         String text = msg.getText();
         text = text.replace(" ","");

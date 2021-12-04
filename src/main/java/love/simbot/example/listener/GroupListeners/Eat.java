@@ -13,7 +13,7 @@ import java.util.Random;
 public class Eat {
 
     @OnGroup
-    @Filter(value = "Bot今天吃什么",matchType = MatchType.EQUALS)
+    @Filter(value = "%Bot今天吃什么",matchType = MatchType.EQUALS)
     public void WhereToEat(GroupMsg msg, Sender sender){
         String[] location = new String[]{"云一","云二","星北一","星北二","星南一","星南二","星南三","外卖"};
         int num = location.length;

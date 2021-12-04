@@ -21,7 +21,7 @@ import java.net.URLEncoder;
 public class Music {
 
     @OnGroup
-    @Filter(value = "点歌",matchType = MatchType.STARTS_WITH)
+    @Filter(value = "%点歌",matchType = MatchType.STARTS_WITH)
     public void music(GroupMsg msg, Sender sender){
         String text = msg.getText();
         text = text.replace(" ", "");

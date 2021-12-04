@@ -20,7 +20,7 @@ import java.net.URLEncoder;
 @Beans
 public class HotTop {
     @OnGroup
-    @Filter(value = "热榜",matchType = MatchType.STARTS_WITH)
+    @Filter(value = "%热榜",matchType = MatchType.STARTS_WITH)
     public void hotTop(GroupMsg msg, Sender sender){
         String text = msg.getText();
         text = text.replace(" ","");
