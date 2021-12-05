@@ -45,10 +45,7 @@ public class BiliBili {
 
         sender.sendGroupMsg(msg, "已启动哔哩哔哩直播监听");
 
-        int flag = 0;
-
         while (true) {
-
             String sql = "select * from Live";
             try {
                 PreparedStatement pstSearch = sqlCon.prepareStatement(sql);
@@ -58,11 +55,12 @@ public class BiliBili {
                     break;
                 } else {
                     while (rs.next()) {
-                        Integer id = rs.getInt("UpID");
+                        long GroupID = rs.getLong("GroupID");
+                        Integer UpID = rs.getInt("UpID");
                         String name = rs.getString("Name");
 
                         StringBuffer result = new StringBuffer();
-                        URL url = new URL("https://api.bilibili.com/x/space/acc/info?mid=" + id.toString());
+                        URL url = new URL("https://api.bilibili.com/x/space/acc/info?mid=" + UpID.toString());
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
@@ -78,6 +76,11 @@ public class BiliBili {
                         JSONObject live_room = data.getJSONObject("live_room");
                         Integer liveStatus = live_room.getInteger("liveStatus");
 
+                        String sqlFlag = "select Flag from Live where GroupID = " + GroupID + " and UpID = " + UpID;
+                        PreparedStatement pstFlag = sqlCon.prepareStatement(sqlFlag);
+                        ResultSet rsFlag = pstFlag.executeQuery();
+                        int flag = rsFlag.getInt("Flag");
+
                         if (liveStatus == 1 && flag == 0) {
                             String title = live_room.getString("title");
                             String liveURL = live_room.getString("url");
@@ -85,13 +88,18 @@ public class BiliBili {
                             content = content + title + "\r\n";
                             content = content + liveURL;
 
-                            sender.sendGroupMsg(msg, content);
+                            sender.sendGroupMsg(GroupID, content);
+                            ++flag;
 
-                            flag++;
+                            String flagUD = "update Live set Flag = " + flag + "where GroupID = " + GroupID + " and UpID = " + UpID;
+                            PreparedStatement pstUD = sqlCon.prepareStatement(flagUD);
+                            pstUD.executeUpdate();
                         }
 
                         if (liveStatus == 0) {
-                            flag = 0;
+                            String flagRe = "update Live set Flag = 0 where GroupID = " + GroupID + " and UpID = " + UpID;
+                            PreparedStatement pstRe = sqlCon.prepareStatement(flagRe);
+                            pstRe.executeUpdate();
                         }
 
                     }
@@ -123,7 +131,7 @@ public class BiliBili {
 
         sender.sendGroupMsg(msg, "已启动哔哩哔哩动态监听");
 
-        String GroupID = msg.getGroupInfo().getGroupCode();
+//        String GroupID = msg.getGroupInfo().getGroupCode();
 
         String sqlRe = "select * from Dynamic";
         try {
@@ -133,10 +141,7 @@ public class BiliBili {
                 sender.sendGroupMsg(msg, "当前暂未订阅UP主！");
             }else {
                 while (rsRe.next()){
-                    Integer UpID = rsRe.getInt("UpID");
-                    String name = rsRe.getString("Name");
-
-                    String sqlFlag = "update Dynamic set Flag = 0 where GroupID = " + GroupID + " and UpID = " + UpID;
+                    String sqlFlag = "update Dynamic set Flag = 0 ";
                     PreparedStatement pstFlag = sqlCon.prepareStatement(sqlFlag);
                     pstFlag.executeUpdate();
 
@@ -158,6 +163,7 @@ public class BiliBili {
                     break;
                 } else {
                     while (rs.next()) {
+                        long GroupID = rs.getLong("GroupID");
                         Integer UpID = rs.getInt("UpID");
                         String name = rs.getString("Name");
 
@@ -211,7 +217,7 @@ public class BiliBili {
                                 //发视频动态
                                 String title = cardRes.getString("title");
                                 String short_link = cardRes.getString("short_link");
-                                sender.sendGroupMsg(msg, name + " 发视频啦！" + "\r\n" + title + "\r\n" + short_link);
+                                sender.sendGroupMsg(GroupID, name + " 发视频啦！" + "\r\n" + title + "\r\n" + short_link);
                             } else if (cardRes.getJSONObject("origin") != null) {
                                 JSONObject itemInfo = cardRes.getJSONObject("item");
                                 String comment = itemInfo.getString("content"); //获取转发时的转发语
@@ -225,13 +231,13 @@ public class BiliBili {
                                 if (origin.getString("title") != null) {
                                     String title = origin.getString("title");
                                     String short_link = origin.getString("short_link");
-                                    sender.sendGroupMsg(msg, name + "\r\n" + comment + "\r\n" + "转发自 " + uname + "\r\n" + title + "\r\n" + short_link);
+                                    sender.sendGroupMsg(GroupID, name + "\r\n" + comment + "\r\n" + "转发自 " + uname + "\r\n" + title + "\r\n" + short_link);
                                 } else {
                                     JSONObject item = origin.getJSONObject("item");
                                     if (item.getString("content") != null) {
                                         //转发纯文本
                                         String content = item.getString("content");
-                                        sender.sendGroupMsg(msg, name + "\r\n" + comment + "\r\n" + "转发自 " + uname + "\r\n" + content);
+                                        sender.sendGroupMsg(GroupID, name + "\r\n" + comment + "\r\n" + "转发自 " + uname + "\r\n" + content);
                                     } else {
                                         //转发带图片的动态
                                         String description = item.getString("description");
@@ -249,7 +255,7 @@ public class BiliBili {
                                             String cat = "[CAT:image,file=" + src + ",flash=false]";
                                             content.append(cat + "\r\n");
                                         }
-                                        sender.sendGroupMsg(msg, content.toString());
+                                        sender.sendGroupMsg(GroupID, content.toString());
                                     }
                                 }
                             } else {
@@ -261,11 +267,11 @@ public class BiliBili {
                                     JSONObject picture = pictures.getJSONObject(0);
                                     String img_src = picture.getString("img_src");
                                     String cat = "[CAT:image,file=" + img_src + ",flash=false]";
-                                    sender.sendGroupMsg(msg, name + " 发动态啦！" + "\r\n" + description + "\r\n" + cat);
+                                    sender.sendGroupMsg(GroupID, name + " 发动态啦！" + "\r\n" + description + "\r\n" + cat);
                                 } else {
                                     //发纯文本动态
                                     String content = item.getString("content");
-                                    sender.sendGroupMsg(msg, name + " 发动态啦！" + "\r\n" + content);
+                                    sender.sendGroupMsg(GroupID, name + " 发动态啦！" + "\r\n" + content);
                                 }
                             }
                         }
@@ -337,7 +343,7 @@ public class BiliBili {
                     String name = data.getString("name");
 
                     String sqlSearch = "select * from Live where GroupID = " + GroupID + " and UpID = " + liveID;
-                    String sql = "insert into Live values (" + GroupID + "," + liveID + "," + "\"" + name + "\"" + ")";
+                    String sql = "insert into Live values (" + GroupID + "," + liveID + "," + "\"" + name + "\"" + ",0" +")";
 
                     PreparedStatement pstSearch = sqlCon.prepareStatement(sqlSearch);
                     ResultSet rs = pstSearch.executeQuery();

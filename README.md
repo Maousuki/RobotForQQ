@@ -41,6 +41,8 @@ password=123456
 - 订阅B站UP主动态提醒  命令：%添加动态订阅+UP主B站主页URL地址
 - 删除B站UP主直播/动态提醒  命令：%删除直播/动态订阅+UP主名字
 - 查询订阅列表  命令：%查询订阅列表
+- 开启直播提醒  命令：%开始监听直播（只需在任意一个部署了机器人的群里发送一次该命令即可，发送后所有部署了机器人的群都会开始监听直播）
+- 开启动态提醒  命令：%开始监听动态（只需在任意一个部署了机器人的群里发送一次该命令即可，发送后所有部署了机器人的群都会开始监听动态）
 
 ### 协助
 
@@ -49,7 +51,8 @@ password=123456
 ### 友情链接
 
 - [simpler-robot: simple-robot](https://github.com/Maousuki/simpler-robot)（感谢提供的Robot框架）
+- [猫猫码，一个可爱的通用特殊码，CQ码的精神延续](https://github.com/ForteScarlet/CatCode)
 - [A-SOUL提醒小助手 IDEA版](https://github.com/cnsky1103/A-SOUL-Reminder)（感谢提供绕过SSL验证方法）
 - [A-SOUL Fans Art - 一个魂的二创 ](https://asoul.cloud/)（感谢提供的随机图片api）
-- [NeteaseCloudMusicApi: 网易云音乐 Node.js API](https://github.com/Maousuki/NeteaseCloudMusicApi)（感谢提供的网易云api）
+- [NeteaseCloudMusicApi: 网易云音乐 Node.js API](https://github.com/Maousuki/NeteaseCloudMusicApi)（感谢提供的众多网易云api）
 
