@@ -71,7 +71,7 @@ public class BiliBili {
                             result.append(line);
                         }
                         in.close();
-                        System.out.println(result.toString());
+//                        System.out.println(result.toString());
 
                         JSONObject res = JSONObject.parseObject(result.toString());
                         JSONObject data = res.getJSONObject("data");
@@ -172,7 +172,7 @@ public class BiliBili {
                             result.append(line);
                         }
                         in.close();
-                        System.out.println(result.toString());
+//                        System.out.println(result.toString());
 
                         JSONObject res = JSONObject.parseObject(result.toString());
                         JSONObject data = res.getJSONObject("data");
@@ -318,7 +318,7 @@ public class BiliBili {
                 result.append(line);
             }
             in.close();
-            System.out.println(result.toString());
+//            System.out.println(result.toString());
 
             JSONObject res = JSONObject.parseObject(result.toString());
             JSONObject data = res.getJSONObject("data");
@@ -390,7 +390,7 @@ public class BiliBili {
                 result.append(line);
             }
             in.close();
-            System.out.println(result.toString());
+//            System.out.println(result.toString());
 
             JSONObject res = JSONObject.parseObject(result.toString());
             Integer code = res.getInteger("code");
@@ -481,7 +481,7 @@ public class BiliBili {
     public void liveDelete(GroupMsg msg, Sender sender) {
         String text = msg.getText();
         text = text.replace(" ", "");    //确保有无空格都能识别
-        String name = text.substring(6, text.length());
+        String name = text.substring(7, text.length());
         String GroupID = msg.getGroupInfo().getGroupCode();
 
         String sqlSearch = "select * from Live where GroupID = " + GroupID + " and name = " + "\"" + name + "\"";
@@ -512,7 +512,7 @@ public class BiliBili {
     public void dynamicDelete(GroupMsg msg, Sender sender) {
         String text = msg.getText();
         text = text.replace(" ", "");    //确保有无空格都能识别
-        String name = text.substring(6, text.length());
+        String name = text.substring(7, text.length());
         String GroupID = msg.getGroupInfo().getGroupCode();
 
         String sqlSearch = "select * from Dynamic where GroupID = " + GroupID + " and name = " + "\"" + name + "\"";

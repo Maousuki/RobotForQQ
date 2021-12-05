@@ -56,7 +56,7 @@ public class HotTop {
                 result.append(line);
             }
             in.close();
-            System.out.println(result.toString());
+//            System.out.println(result.toString());
 
             String context = "";
 

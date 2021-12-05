@@ -41,7 +41,7 @@ public class Music {
                 result.append(line);
             }
             in.close();
-            System.out.println(result.toString());
+//            System.out.println(result.toString());
 
             JSONObject jsonRes = JSONObject.parseObject(result.toString());
             JSONObject data = jsonRes.getJSONObject("data");
@@ -62,7 +62,7 @@ public class Music {
                 resultJPG.append(lineJPG);
             }
             in.close();
-            System.out.println(resultJPG.toString());
+//            System.out.println(resultJPG.toString());
 
             JSONObject jsonResSong = JSONObject.parseObject(resultJPG.toString());
             JSONArray songInfo = jsonResSong.getJSONArray("songs");
@@ -92,7 +92,7 @@ public class Music {
                 resultSong.append(lineSong);
             }
             in.close();
-            System.out.println(resultSong.toString());
+//            System.out.println(resultSong.toString());
 
             JSONObject urlRes = JSONObject.parseObject(resultSong.toString());
             JSONObject dataURL = urlRes.getJSONObject("data");

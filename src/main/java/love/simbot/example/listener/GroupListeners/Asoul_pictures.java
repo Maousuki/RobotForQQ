@@ -45,7 +45,7 @@ public class Asoul_pictures {
                 result.append(line);
             }
             in.close();
-            System.out.println(result.toString());
+//            System.out.println(result.toString());
 
             JSONObject res = JSONObject.parseObject(result.toString());
             String img = res.getString("img");

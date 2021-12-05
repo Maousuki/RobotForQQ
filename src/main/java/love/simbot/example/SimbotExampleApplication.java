@@ -1,9 +1,8 @@
 package love.simbot.example;
 
 import love.forte.simbot.annotation.SimbotApplication;
-import love.forte.simbot.annotation.SimbotResource;
 import love.forte.simbot.core.SimbotApp;
-import data.Sqlite;
+
 
 /**
  * simbot 启动类。
