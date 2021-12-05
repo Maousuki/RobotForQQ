@@ -25,7 +25,7 @@ public class Music {
     public void music(GroupMsg msg, Sender sender){
         String text = msg.getText();
         text = text.replace(" ", "");
-        String song = text.substring(2,text.length());
+        String song = text.substring(3,text.length());
         System.out.println(song);
 
         StringBuffer result = new StringBuffer();

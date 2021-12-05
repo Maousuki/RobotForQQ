@@ -24,7 +24,7 @@ public class HotTop {
     public void hotTop(GroupMsg msg, Sender sender){
         String text = msg.getText();
         text = text.replace(" ","");
-        String app = text.substring(2,text.length());
+        String app = text.substring(3,text.length());
         System.out.println(app);
 
         if (app.equals("知乎")){

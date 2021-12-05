@@ -9,6 +9,7 @@ public class Sqlite {
         Connection con = null;
 
         try {
+//            String url = "jdbc:sqlite:subscription.db";
             String url = "jdbc:sqlite:src/main/resources/DB/subscription.db";
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection(url);

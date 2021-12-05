@@ -23,7 +23,7 @@ public class Weather {
     public void Weather(GroupMsg msg, Sender sender){
         String text = msg.getText();
         text = text.replace(" ","");
-        String city = text.substring(4,text.length());
+        String city = text.substring(5,text.length());
         System.out.println(city);
 
         StringBuffer result = new StringBuffer();

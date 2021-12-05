@@ -125,6 +125,28 @@ public class BiliBili {
 
         String GroupID = msg.getGroupInfo().getGroupCode();
 
+        String sqlRe = "select * from Dynamic";
+        try {
+            PreparedStatement pstRe = sqlCon.prepareStatement(sqlRe);
+            ResultSet rsRe = pstRe.executeQuery();
+            if (rsRe.isClosed()){
+                sender.sendGroupMsg(msg, "当前暂未订阅UP主！");
+            }else {
+                while (rsRe.next()){
+                    Integer UpID = rsRe.getInt("UpID");
+                    String name = rsRe.getString("Name");
+
+                    String sqlFlag = "update Dynamic set Flag = 0 where GroupID = " + GroupID + " and UpID = " + UpID;
+                    PreparedStatement pstFlag = sqlCon.prepareStatement(sqlFlag);
+                    pstFlag.executeUpdate();
+
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }   //每次开机时，更新数据库Flag=0，防止发送上次关机前保留的动态
+
+
         while (true) {
 
             String sqlSearch = "select * from Dynamic";
@@ -324,7 +346,7 @@ public class BiliBili {
                     } else {
                         PreparedStatement pst = sqlCon.prepareStatement(sql);
                         pst.executeUpdate();
-                        sender.sendGroupMsg(msg, "成功订阅 " + name + " 的动态通知！");
+                        sender.sendGroupMsg(msg, "成功订阅 " + name + " 的直播通知！");
                     }
                 }
             }
