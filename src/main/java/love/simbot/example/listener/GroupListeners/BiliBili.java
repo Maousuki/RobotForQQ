@@ -88,12 +88,13 @@ public class BiliBili {
                             content = content + title + "\r\n";
                             content = content + liveURL;
 
-                            sender.sendGroupMsg(GroupID, content);
                             ++flag;
 
-                            String flagUD = "update Live set Flag = " + flag + "where GroupID = " + GroupID + " and UpID = " + UpID;
+                            String flagUD = "update Live set Flag = " + flag + " where GroupID = " + GroupID + " and UpID = " + UpID;
                             PreparedStatement pstUD = sqlCon.prepareStatement(flagUD);
                             pstUD.executeUpdate();
+
+                            sender.sendGroupMsg(GroupID, content);
                         }
 
                         if (liveStatus == 0) {
@@ -102,9 +103,11 @@ public class BiliBili {
                             pstRe.executeUpdate();
                         }
 
+                        Thread.sleep(3000);
+
                     }
 
-                    Thread.sleep(60000);
+                    Thread.sleep(120000);
 
                 }
             } catch (MalformedURLException e) {
@@ -279,7 +282,7 @@ public class BiliBili {
                         String sqlUpdate = "update Dynamic set PreMsg = " + "\"" + tmp + "\"" + " where GroupID = " + GroupID + " and UpID = " + UpID;
                         PreparedStatement pstUpdate = sqlCon.prepareStatement(sqlUpdate);
                         pstUpdate.executeUpdate();
-
+                        Thread.sleep(3000);
                     }
                 }
             } catch (MalformedURLException e) {

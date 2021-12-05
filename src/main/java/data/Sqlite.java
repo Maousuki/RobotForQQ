@@ -9,8 +9,8 @@ public class Sqlite {
         Connection con = null;
 
         try {
-            String url = "jdbc:sqlite:subscription.db";//linux下
-//            String url = "jdbc:sqlite:src/main/resources/DB/subscription.db";//windows下
+            //String url = "jdbc:sqlite:subscription.db";//linux下
+            String url = "jdbc:sqlite:src/main/resources/DB/subscription.db";//windows下
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
