@@ -190,6 +190,7 @@ public class BiliBili {
                         String card = obj.getString("card");
                         String tmp = card;
                         tmp = tmp.replaceAll("[^\\u4e00-\\u9fa5]", ""); //只需要返回值里的中文部分来判重，字符部分每次都可能不一样，不好判重
+                        tmp = tmp.substring(0,20);
 
                         String sql = "select Flag from Dynamic where GroupID = " + GroupID + " and UpID = " + UpID;
                         PreparedStatement pst = sqlCon.prepareStatement(sql);
