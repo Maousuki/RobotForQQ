@@ -50,7 +50,7 @@ public class Asoul_pictures {
             JSONObject res = JSONObject.parseObject(result.toString());
             String img = res.getString("img");
             String url = res.getString("dy_url");
-            System.out.println(img);
+//            System.out.println(img);
 
             String cat = "[CAT:image,file=" + img + ",flash=false]";
             sender.sendGroupMsg(msg,cat + "\r\n" + url);
