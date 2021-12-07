@@ -187,10 +187,9 @@ public class BiliBili {
                         JSONObject data = res.getJSONObject("data");
                         JSONArray cards = data.getJSONArray("cards");
                         JSONObject obj = cards.getJSONObject(0);
+                        JSONObject desc = obj.getJSONObject("desc");
+                        String dynamic_id_str = desc.getString("dynamic_id_str");
                         String card = obj.getString("card");
-                        String tmp = card;
-                        tmp = tmp.replaceAll("[^\\u4e00-\\u9fa5]", ""); //只需要返回值里的中文部分来判重，字符部分每次都可能不一样，不好判重
-                        tmp = tmp.substring(0,20);
 
                         String sql = "select Flag from Dynamic where GroupID = " + GroupID + " and UpID = " + UpID;
                         PreparedStatement pst = sqlCon.prepareStatement(sql);
@@ -200,20 +199,20 @@ public class BiliBili {
 
                         if (flag == 0) {    //跳过第一次循环
                             String sqlFlag = "update Dynamic set Flag = 1 where GroupID = " + GroupID + " and UpID = " + UpID;
-                            String sqlPre = "update Dynamic set PreMsg = " + "\"" + tmp + "\"" + " where GroupID = " + GroupID + " and UpID = " + UpID;
+                            String preDID = "update Dynamic set DynamicID = " + "\"" + dynamic_id_str + "\"" + " where GroupID = " + GroupID + " and UpID = " + UpID;
                             PreparedStatement pstFlag = sqlCon.prepareStatement(sqlFlag);
                             pstFlag.executeUpdate();
-                            PreparedStatement pstPre = sqlCon.prepareStatement(sqlPre);
+                            PreparedStatement pstPre = sqlCon.prepareStatement(preDID);
                             pstPre.executeUpdate();
                             continue;
                         }
 
-                        String sqlMsg = "select PreMsg from Dynamic where GroupID = " + GroupID + " and UpID = " + UpID;
-                        PreparedStatement pstMsg = sqlCon.prepareStatement(sqlMsg);
-                        ResultSet rsMsg = pstMsg.executeQuery();
-                        String pre = rsMsg.getString("PreMsg");
+                        String sqlDID = "select DynamicID from Dynamic where GroupID = " + GroupID + " and UpID = " + UpID;
+                        PreparedStatement pstDID = sqlCon.prepareStatement(sqlDID);
+                        ResultSet rsDID = pstDID.executeQuery();
+                        String pre = rsDID.getString("DynamicID");
 
-                        if (tmp.equals(pre)) {
+                        if (dynamic_id_str.equals(pre)) {
                             continue;
                         } else {
                             JSONObject cardRes = JSONObject.parseObject(card);
@@ -280,7 +279,7 @@ public class BiliBili {
                             }
                         }
 
-                        String sqlUpdate = "update Dynamic set PreMsg = " + "\"" + tmp + "\"" + " where GroupID = " + GroupID + " and UpID = " + UpID;
+                        String sqlUpdate = "update Dynamic set DynamicID = " + "\"" + dynamic_id_str + "\"" + " where GroupID = " + GroupID + " and UpID = " + UpID;
                         PreparedStatement pstUpdate = sqlCon.prepareStatement(sqlUpdate);
                         pstUpdate.executeUpdate();
                         Thread.sleep(3000);
