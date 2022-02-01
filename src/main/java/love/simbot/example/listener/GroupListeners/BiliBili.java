@@ -103,20 +103,14 @@ public class BiliBili {
                             pstRe.executeUpdate();
                         }
 
-                        Thread.sleep(3000);
-
+                        Thread.sleep(5000);
                     }
-
-                    Thread.sleep(120000);
-
                 }
-            } catch (MalformedURLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+                live(msg, sender);
             }
+            Thread.sleep(120000);
         }
     }
 
@@ -282,15 +276,12 @@ public class BiliBili {
                         String sqlUpdate = "update Dynamic set DynamicID = " + "\"" + dynamic_id_str + "\"" + " where GroupID = " + GroupID + " and UpID = " + UpID;
                         PreparedStatement pstUpdate = sqlCon.prepareStatement(sqlUpdate);
                         pstUpdate.executeUpdate();
-                        Thread.sleep(3000);
+                        Thread.sleep(5000);
                     }
                 }
-            } catch (MalformedURLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+                dynamic(msg, sender);
             }
             Thread.sleep(120000);
         }
