@@ -62,6 +62,7 @@ public class BiliBili {
                         StringBuffer result = new StringBuffer();
                         URL url = new URL("https://api.bilibili.com/x/space/acc/info?mid=" + UpID.toString());
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("GET");
                         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
                         String line;
@@ -168,6 +169,7 @@ public class BiliBili {
 
                         URL url = new URL("https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/space_history?host_uid=" + UpID.toString());
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("GET");
                         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
                         String line;
@@ -311,6 +313,7 @@ public class BiliBili {
         try {
             URL url = new URL("https://api.bilibili.com/x/space/acc/info?mid=" + liveID);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             String line;
@@ -383,6 +386,7 @@ public class BiliBili {
         try {
             URL url = new URL("https://api.bilibili.com/x/space/acc/info?mid=" + dynamicID);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             String line;
